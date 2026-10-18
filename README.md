@@ -89,3 +89,11 @@ media, unique billing or customer-revenue proof. [Report a problem](https://gith
 The shared OpenAI MCP is deliberately filtered in this plugin namespace: only `openai_generate_image`, `openai_edit_image` and `openai_get_task` remain. Generation/edit model enums contain only advertised `gpt-image-*` IDs. Chat, audio, embeddings, DALL-E and Nano Banana tools/models are excluded here; no shared MCP is changed. Unknown upstream model schemas hide the submit tools instead of exposing a broad service. Use `openai_get_task(id=...)`, not a `task_id` argument. Include `/openai/images/edits` in Allowed APIs when editing images.
 
 Generation and edit tools require an explicit `gpt-image-*` model. In particular, the shared edit tool default can be DALL-E; this plugin removes that default instead of sending an unintended model.
+
+Verified pinned candidate installation (2026-10-18; OpenCode 2.0.26):
+
+```bash
+opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#a6656d1b7df0da2f447551a8c0f947cbd618af0e'
+```
+
+This pin contains the same runtime as this README update. Install only one target. The mutable branch request timed out on this test network; the explicit commit installed and activated successfully.

@@ -57,3 +57,11 @@ pending/processing不代表失败，预览URL不算完成；不要再生成来�
 只在本插件命名空间保留 `openai_generate_image`、`openai_edit_image`、`openai_get_task`；模型枚举只含当前Schema的 `gpt-image-*`。不暴露聊天/音频/embedding、DALL-E或Nano Banana，且不修改共享MCP。若上游Schema无法安全缩窄则隐藏提交工具。查询参数为 `openai_get_task(id=...)`，不是task_id；图片编辑权限还需 `/openai/images/edits`。
 
 生成和编辑均必须显式选择 `gpt-image-*`。共享编辑工具默认可能为DALL-E，本插件移除该默认值，不能漏传模型后误发其他服务。
+
+2026-10-18已在OpenCode 2.0.26验证的固定候选（仅安装一种目标）：
+
+```bash
+opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#a6656d1b7df0da2f447551a8c0f947cbd618af0e'
+```
+
+该提交与此次README更新的运行代码相同。本机可变分支解析超时，固定提交已安装并激活；不把网络重试当媒体生成。
