@@ -65,3 +65,5 @@ opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#
 ```
 
 该提交与此次README更新的运行代码相同。本机可变分支解析超时，固定提交已安装并激活；不把网络重试当媒体生成。
+
+[复现无需凭据/生成的真实宿主包检查](../docs/VERIFY.md)，不等于完整生成、官方收录或账单验收。

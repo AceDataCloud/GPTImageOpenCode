@@ -2,7 +2,7 @@
 
 This repository owns only the OpenCode 2 native GPT Image adapter and onboarding.
 GPT Image API transport, schemas, task normalization and billing remain in
-AceDataCloud/MCPs (`gptimage/`, published as OpenAIMCP). Do not duplicate them here.
+AceDataCloud/MCPs (`openai/`, published as OpenAIMCP). Do not duplicate them here.
 
 - Run `npm test`, `npm run check` and `npm pack --dry-run` before a PR.
 - Add no billable generation, model request, task submission or retry to install,

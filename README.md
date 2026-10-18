@@ -97,3 +97,5 @@ opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#
 ```
 
 This pin contains the same runtime as this README update. Install only one target. The mutable branch request timed out on this test network; the explicit commit installed and activated successfully.
+
+[Reproduce the free packed-package host check](docs/VERIFY.md). This is not a generation, official-listing or billing test.
