@@ -4,16 +4,33 @@
 复用 [OpenAIMCP](https://github.com/AceDataCloud/OpenAIMCP)，不复制 API、Schema 或计费实现。
 这是 Ace 提供的独立集成，不是 GPT Image / OpenCode 官方产品。[English](../README.md)。
 
-## 1. 安装
+## 1. 安装已合并插件
 
-先 `opencode --version` 核对为2，1的插件API不同。[官方安装说明](https://opencode.ai/v2/docs/plugins/)。
-源码PR为候选，main尚无实现，npm未发布、官方目录未收录。审查代码后：
+要求 **OpenCode 2.0.26+**，先 `opencode --version` 核对。OpenCode 1 的插件API不同。
+[官方插件管理器](https://opencode.ai/v2/docs/plugins/)。
+
+实现已进入 `main`，可通过官方Git包机制安装：
 
 ```bash
-opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#codex/native-service-plugin'
+opencode plugin add github:AceDataCloud/GPTImageOpenCode
 ```
 
-也可使用 `github:AceDataCloud/GPTImageOpenCode#codex/native-service-plugin`。main经审查发布后先移除同候选目标，再装主线，不重复安装。
+需要固定版本时使用 **v0.1.0** Git版本：
+
+```bash
+opencode plugin add 'github:AceDataCloud/GPTImageOpenCode#v0.1.0'
+```
+
+HTTPS快捷地址受本机网络影响时，可沿用已有GitHub SSH访问：
+
+```bash
+opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#v0.1.0'
+```
+
+[发行说明与源码归档](https://github.com/AceDataCloud/GPTImageOpenCode/releases/tag/v0.1.0)。
+Git版本与npm发布分开记，本文不宣称npm已发布；[官方社区目录投稿](https://github.com/anomalyco/opencode/pull/56666)仍待审，非官方背书或产品内商城上架。
+此前装过候选分支时先用 `opencode plugin remove` 移除原完整目标，再装正式目标，只保留一份。
+安装添加 **GPT Image by Ace Data Cloud** 的原生Key/env入口、固定托管MCP与任务Skill，不替你选择聊天模型，也不自动授权生成。
 
 ## 2. 注册登录与API Token
 
@@ -57,13 +74,3 @@ pending/processing不代表失败，预览URL不算完成；不要再生成来�
 只在本插件命名空间保留 `openai_generate_image`、`openai_edit_image`、`openai_get_task`；模型枚举只含当前Schema的 `gpt-image-*`。不暴露聊天/音频/embedding、DALL-E或Nano Banana，且不修改共享MCP。若上游Schema无法安全缩窄则隐藏提交工具。查询参数为 `openai_get_task(id=...)`，不是task_id；图片编辑权限还需 `/openai/images/edits`。
 
 生成和编辑均必须显式选择 `gpt-image-*`。共享编辑工具默认可能为DALL-E，本插件移除该默认值，不能漏传模型后误发其他服务。
-
-2026-10-18已在OpenCode 2.0.26验证的固定候选（仅安装一种目标）：
-
-```bash
-opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#a6656d1b7df0da2f447551a8c0f947cbd618af0e'
-```
-
-该提交与此次README更新的运行代码相同。本机可变分支解析超时，固定提交已安装并激活；不把网络重试当媒体生成。
-
-[复现无需凭据/生成的真实宿主包检查](../docs/VERIFY.md)，不等于完整生成、官方收录或账单验收。

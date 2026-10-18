@@ -6,20 +6,38 @@ with a native `/connect` credential entry, hosted MCP and task Skill. It reuses
 Independent Ace integration; not made or endorsed by GPT Image or OpenCode.
 [简体中文](readme/README_zh_Hans.md) · [Privacy](PRIVACY.md).
 
-## 1. Install through OpenCode
+## 1. Install the released plugin
 
-Check `opencode --version`. OpenCode 1 uses a different plugin API.
-[Official plugin installation](https://opencode.ai/v2/docs/plugins/).
-The source PR is a candidate: main has no released plugin yet; npm is not published
-and official ecosystem inclusion is not claimed. Review the branch, then install:
+Requires **OpenCode 2.0.26+**. Check `opencode --version`; OpenCode 1 has a different plugin API.
+See [OpenCode's plugin manager](https://opencode.ai/v2/docs/plugins/).
+
+The implementation is merged on `main`. Install through the official Git-package mechanism:
 
 ```bash
-opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#codex/native-service-plugin'
+opencode plugin add github:AceDataCloud/GPTImageOpenCode
 ```
 
-GitHub shortcut: `opencode plugin add 'github:AceDataCloud/GPTImageOpenCode#codex/native-service-plugin'`.
-After reviewed main is published, remove the candidate with `opencode plugin remove`
-using the same target, then install `github:AceDataCloud/GPTImageOpenCode`. Never install both.
+For a fixed version, use the **v0.1.0** Git release:
+
+```bash
+opencode plugin add 'github:AceDataCloud/GPTImageOpenCode#v0.1.0'
+```
+
+If your network cannot reach the HTTPS shortcut, the official Git SSH form uses your existing GitHub SSH access:
+
+```bash
+opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#v0.1.0'
+```
+
+[Release notes and source archive](https://github.com/AceDataCloud/GPTImageOpenCode/releases/tag/v0.1.0).
+Git release and npm publication are separate: npm availability is not claimed here.
+The [OpenCode community-directory submission](https://github.com/anomalyco/opencode/pull/56666)
+remains under review and is not an endorsement or an in-product marketplace listing.
+If you installed an earlier candidate target, remove that exact target with `opencode plugin remove`
+before adding the released target. Install only one copy.
+
+Installing registers **GPT Image by Ace Data Cloud** as a native key/env connection,
+a fixed hosted MCP server, and a task Skill. It does not select your chat model or authorize generation.
 
 ## 2. Register/sign in and get the right token
 
@@ -89,13 +107,3 @@ media, unique billing or customer-revenue proof. [Report a problem](https://gith
 The shared OpenAI MCP is deliberately filtered in this plugin namespace: only `openai_generate_image`, `openai_edit_image` and `openai_get_task` remain. Generation/edit model enums contain only advertised `gpt-image-*` IDs. Chat, audio, embeddings, DALL-E and Nano Banana tools/models are excluded here; no shared MCP is changed. Unknown upstream model schemas hide the submit tools instead of exposing a broad service. Use `openai_get_task(id=...)`, not a `task_id` argument. Include `/openai/images/edits` in Allowed APIs when editing images.
 
 Generation and edit tools require an explicit `gpt-image-*` model. In particular, the shared edit tool default can be DALL-E; this plugin removes that default instead of sending an unintended model.
-
-Verified pinned candidate installation (2026-10-18; OpenCode 2.0.26):
-
-```bash
-opencode plugin add 'git+ssh://git@github.com/AceDataCloud/GPTImageOpenCode.git#a6656d1b7df0da2f447551a8c0f947cbd618af0e'
-```
-
-This pin contains the same runtime as this README update. Install only one target. The mutable branch request timed out on this test network; the explicit commit installed and activated successfully.
-
-[Reproduce the free packed-package host check](docs/VERIFY.md). This is not a generation, official-listing or billing test.
